@@ -30,7 +30,7 @@ with st.form('my_form'):
             answer = llm(prompt="write a job application for the following vacancy: " + doc.page_content + "based on this cv:" + pdf_text, max_tokens = 1000)
             sentences = answer.split(':')
             updated_answer = ':'.join(sentences[1:])
-            updated_answer = truncate_at_sentence(updated_answer, 10)
+            updated_answer = truncate_at_sentence(updated_answer)
 
             st.info(updated_answer)
             st.success("Application letter generated successfully! To regenerate, click 'Submit' again.")
