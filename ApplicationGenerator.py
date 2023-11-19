@@ -6,11 +6,10 @@ from pdfminer.high_level import extract_text
 
 llm = Cohere(cohere_api_key="Q37DUZNj7vmTC4HYjFrQ1yNUDAH5PneuNJ5iSwpK")
 
-def truncate_at_sentence(text, max_sentences):
+def truncate_at_sentence(text):
     sentences = text.split('.')
     filtered_sentences = [sentence for sentence in sentences if not sentence.strip().endswith('?')]
-    truncated_sentences = filtered_sentences[:max_sentences]
-    truncated_text = '. '.join(str(sentence) for sentence in truncated_sentences)
+    truncated_text = '.'.join(filtered_sentences)
     return truncated_text
 
 st.write("""
@@ -32,6 +31,7 @@ with st.form('my_form'):
             sentences = answer.split(':')
             updated_answer = ':'.join(sentences[1:])
             updated_answer = truncate_at_sentence(updated_answer, 10)
+
             st.info(updated_answer)
             st.success("Application letter generated successfully! To regenerate, click 'Submit' again.")
 
