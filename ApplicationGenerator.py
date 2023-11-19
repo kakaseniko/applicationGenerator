@@ -32,7 +32,7 @@ with st.form('my_form'):
             updated_answer = ':'.join(sentences[1:])
             updated_answer = truncate_at_sentence(updated_answer)
 
-            st.info(updated_answer)
+            st.write(updated_answer)
             st.success("Application letter generated successfully! To regenerate, click 'Submit' again.")
 
             
