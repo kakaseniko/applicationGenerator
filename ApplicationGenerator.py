@@ -2,15 +2,12 @@ import streamlit as st
 from langchain.llms import Cohere
 from langchain.docstore.document import Document
 from pdfminer.high_level import extract_text
-import spacy
 
-nlp = spacy.load("en_core_web_sm")
 
 llm = Cohere(cohere_api_key="Q37DUZNj7vmTC4HYjFrQ1yNUDAH5PneuNJ5iSwpK")
 
 def truncate_at_sentence(text, max_sentences):
-    doc = nlp(text)
-    sentences = list(doc.sents)
+    sentences = text.split('.')
     filtered_sentences = [sentence for sentence in sentences if not sentence.text.strip().endswith('?')]
     truncated_sentences = filtered_sentences[:max_sentences]
     truncated_text = ' '.join(str(sentence) for sentence in truncated_sentences)
